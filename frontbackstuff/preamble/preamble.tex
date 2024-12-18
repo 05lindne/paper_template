@@ -1,11 +1,6 @@
-%!TEX root = ../../main.tex
+%!TEX root = ../../../main.tex
 
-
-%advice: in linux, put new style files into something like /usr/share/texmf/tex/latex and then run ``texhash''
-
-
-% \usepackage{newclude}	% for the option \include*{...}, to prevent pagebreak between consecutive sections saved in two different files. (reimplementation of \include and \includeonly -> http://www.ctan.org/pkg/newclude)
-
+\renewcommand{\familydefault}{\sfdefault} %use sans serif font in whole document
 
 \usepackage{caption}
 \usepackage{lineno}	% allows line numbering: \linenumbers
@@ -18,9 +13,10 @@
 \usepackage{xcolor}
 \usepackage{makeidx}
 \usepackage{fancyhdr}	%options for headers and footers
+\usepackage{authblk}
 
 \usepackage[breaklinks=true,colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
-\usepackage[noabbrev, nameinlink, capitalize]{cleveref}      % to enable referencing of items 'nameinlink' option emulates look of \cref
+
 % \usepackage{backref} %gives page numbers where reference is called in references
 
 
@@ -28,12 +24,15 @@
 % \usepackage{mathtools}%extention to amsmath; loads amsmath;
 \usepackage{xspace}% when used in newcommand, space is only inserted, if not followed by dot, comma... Must be written at the LAST spot within the braces of a newcommand!!!
 \usepackage{parskip}
-\usepackage[singlelinecheck=false, aboveskip=-3pt]{subcaption}% use this package if subfigures are wanted, contains newest implementation of subfigures
+\usepackage[singlelinecheck=false, subrefformat=parens,labelformat=parens]{subcaption}% use this package if subfigures are wanted, contains newest implementation of subfigures
 % \usepackage{cleveref}%supports cref to reference multiple things in a row and to automatically write into the text what object is referenced to(http://get-software.net/macros/latex/contrib/cleveref/cleveref.pdf)
 % \usepackage[plain]{fancyref}%usage: \cref{type:title} or \cref{type:title}, gets information about kind of referenced stuff and writes name&number
 \usepackage{textcomp}
 \usepackage{gensymb}%for units
-\usepackage{siunitx}
+\usepackage[separate-uncertainty=true]{siunitx}
+\usepackage[version=4]{mhchem}
+\sisetup{detect-all} % tell siunitx that it should detect the surrounding font family
+
 \usepackage{booktabs}% to use \toprule, \bottomrule in table
 \usepackage[inline]{enumitem} % inline option which implements inline versions of the standard lists using starred versions of the basic list environments.
 
@@ -42,13 +41,24 @@
 \let\subsectioncrefname\sectioncrefname
 \let\subsubsectioncrefname\sectioncrefname
 
-\usepackage[margin=2.2cm,includehead,includefoot]{geometry}% Set margin sizes
+\usepackage[margin=2.5cm,includehead,includefoot]{geometry}% Set margin sizes
+%\usepackage[includehead,includefoot]{geometry}% Set margin sizes
 % \geometry{bindingoffset=1cm}
 
-\usepackage{todonotes}
+%\usepackage{todonotes}
+%\usepackage{easyReview}
+\usepackage{changes} %The package allows the user to manually markup changes of text, such as additions, deletions, or replacements. Changed text is shown in a different color; deleted text is striked out. Additionally, text can be highlighted and/or commented. 
+% Comments may not be fully visible, when margins are set by hand!!!
+\definechangesauthor[name=Sarah, color=blue]{SL}
+\definechangesauthor[name=Nancy, color=red]{NR}
+
+
+\usepackage[noabbrev, nameinlink, capitalize]{cleveref}      % to enable referencing of items 'nameinlink' option emulates look of \cref;; has to be loaded after amsmath --> keep cleveref at bottom as some other packages may load amsmath in background
+
+
 
 \hypersetup{%
-  pdftitle=SiV in Milled Nanodiamonds,
+  pdftitle=Title,
   pdfauthor=Sarah Lindner,
   colorlinks=false}
 
@@ -70,7 +80,7 @@
   style=numeric,%
   % style=authoryear-comp, % Author 1999, 2010
   % sorting=nyt, % name, year, title
-  sorting=none, % name, year, title
+  sorting=none,
   maxbibnames=3, % default: 3, et al.
   % backref=true,%
   natbib=true, % natbib compatibility mode (\citep and \citet still work)
